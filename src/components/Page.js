@@ -1,75 +1,80 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import '../index.css';
 
 
-const Page = () => {
-  const [timerYears, setTimerYears] = useState('00')
-  const [timerDays, setTimerDays] = useState('00')
-  const [timerhours, setTimerHours] = useState('00')
-  const [timerMinutes, setTimerMinutes] = useState('00')
-  const [timerSeconds, setTimerSeconds] = useState('00')
-  
+const Page = React.memo(props => {
+  const [inputState, inputStateUpdate ] = useState('')
 
-  const presentDate = () => {
-    new Date()
+  const [yearsDuration, setYearsDuration] = useState('00')
+  const [weeksDuration, setWeeksDuration] = useState('00')
+  const [daysDuration, setDaysDuration] = useState('00')
+  const [hoursDuration, setHoursDuration] = useState('00')
+  const [minutesDuration, setMinutesDuration] = useState('00')
+  const [secondsDuration, setSecondsDuration] = useState('00')
+
+  const timeDuration = () => {
+    let minutes = 1000 * 60;
+    let hours = minutes * 60;
+    let days = hours * 24;
+    let weeks = days * 7;
+    let years = days * 365;
+    let d = new Date();
+    let t= d.getTime() / 60;
+    let setMinutesDuration = d.getTime() / 60;
+    let setSecondsDuration = d.getTime() / 60 * 60;
+  
+    const setYearsDuration = Math.round(t / years);
+    const setWeeksDuration = Math.round(t / weeks)
+    const setDaysDuration = Math.round(t / days)
+    const setHoursDuration = Math.round(t / hours);
+    
   }
 
-
-  const startCountdown = () => {
-    const now = new Date().getTime()
-    const minutes = 1000 * 60;
-    const hours = minutes * 60;
-    const days = hours * 24;
-    const years = days * 365;
-    const d = new Date();
-    const t= d.getTime();
-    
-      const y = Math.round(t / years);
-      const dd = Math.round(t / days);
-      const h = Math.round(t / hours);
-      const m = Math.round(t / minutes);
-
-      const handleSubmit = () => {
-        setTimerYears(y)
-        setTimerDays(dd)
-        setTimerHours(h)
-        setTimerMinutes(m)
-        setTimerSeconds(m)
-      }
-
-  } 
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
 
   return (
-    <div className='container align-center mb-5'>
-      <div className='mb-5 text-center'>
-        <h2>BirthMomentó<i class="fas fa-stopwatch"></i></h2>
+    <div className='container align-center'>
+      <div className='text-center mt-5'>
+        <h2 className='text-warning'>BirthMomentó<i className="fas fa-stopwatch text-danger"></i></h2>
         <p>Today is </p>
       </div>
       
       {/* Duration Input */}
-      <form onSubmit={handleSubmit(submitForm)} className='date' action=""> 
-        <h4 className=''>Pick your date of birth below</h4>
-          <input type="date" id="birthday" name="birthday"/>
-          <input className='btn btn-sm btn-dark' type="submit" />
-      </form>
+      <div className='border border-warning'>
+        <form onSubmit={handleSubmit} className='date text-center ' action=""> 
+          <h4 className='mt-5 align-center text-warning'>Pick your date of birth below</h4>
+            <input type="date" id="birthday" name="birthday" 
+            value={inputState} 
+            onChange={event => {
+              inputStateUpdate(event.target.value)
+           }}
+            />
+            <input className='btn btn-sm btn-warning m-2' type="submit"/>
+        </form>
 
-      {/* Duration */}
-      <div className='memento'>
-        <h5 className='display-bold'>You have lived</h5>
-        <p>Years: {timerYears}</p>
-        <p>Days: {timerDays}</p>
-        <p>hours: {timerhours}</p>
-        <p>Minutes: {timerMinutes}</p>
-        <p>seconds: {timerSeconds}</p>
+        {/* Duration */}
+        <div className='memento p-3 mt-5'>
+          <h4 className='display-bold text-warning'>You have lived</h4>
+          <h5>Years: {yearsDuration} years</h5>
+          <h5>Weeks: {weeksDuration} weeks</h5>
+          <h5>Days: {daysDuration} days</h5>
+          <h5>hours: {hoursDuration} hours</h5>
+          <h5>Minutes: {minutesDuration} minutes</h5>
+          <h5>seconds: {secondsDuration} seconds</h5>
+        </div>
+
       </div>
-
+      
 
       {/* Footer */}
       {/* <h4>This app was built byValentine</h4> */}
       
 
     </div>
+      
   )
-}
+}) 
 
 export default Page

@@ -1,0 +1,17 @@
+const timeDuration = () => {
+  let minutes = 1000 * 60;
+  let hours = minutes * 60;
+  let days = hours * 24;
+  let weeks = days * 7;
+  let years = days * 365;
+  let d = new Date();
+  let t= d.getTime() / 60;
+  let minutes = d.getTime() / 60;
+  let seconds = d.getTime() / 60 * 60;
+
+  const yr = Math.round(t / years);
+  const wk = Math.round(t / weeks)
+  const dy = Math.round(t / days)
+  const hr = Math.round(t / hours);
+  
+}

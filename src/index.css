@@ -18,19 +18,15 @@ h4 {
   color: white;
 }
 
-.memento {
-  margin-top: 5rem;
-}
 .date {
-  margin-top: 5rem;
   color: black;
   align-items: center;
   justify-content: center;
 }
 
-.btn {
-  background-color: rgb(82, 80, 80);
+/* .btn {
+  background-color: white;
   margin: 2rem;
-  color: white;
-}
+  color: black;
+} */
 

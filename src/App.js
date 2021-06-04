@@ -3,7 +3,7 @@ import Page from './components/Page'
 
 function App() {
   return (
-    <div className="bg-dark">
+    <div className="mt-5">
       <Page/> 
     </div>
   );
